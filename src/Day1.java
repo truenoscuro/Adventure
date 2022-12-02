@@ -6,12 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Day1 {
-    static BufferedReader br = null;
-    static String rd;
+    private static BufferedReader br = null;
+    private static String rd;
 
 
     private static void open() throws IOException {
-        br = new BufferedReader(new FileReader("utils/input.txt"));
+        br = new BufferedReader(new FileReader("utils/day1.txt"));
         read(); // <-- initial read
     }
     private static void read() throws IOException {
