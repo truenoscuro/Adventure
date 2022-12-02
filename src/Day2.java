@@ -4,13 +4,15 @@ import java.io.IOException;
 
 public class Day2 {
     /*
-    Rock --> A, X
-    Paper --> B,Y
-    Scissors --> C,Z
+    Rock --> A, X(Lost) -1
+    Paper --> B,Y(draw) 0
+    Scissors --> C,Z (Win) 1
      */
     private  static boolean isRock(char e){
         return e == 'A' || e == 'X' ;
     }
+
+
     private static boolean isPaper(char e){
         return e =='B' || e == 'Y';
     }
@@ -23,7 +25,6 @@ public class Day2 {
         else if(isScissors(e)) point = 3; //Point Scissors
         return point;
     }
-
     private static boolean winLeft(char o,char y){
         return  isRock( o ) && isScissors( y ) || // win Rock
                 isScissors( o ) && isPaper(y ) || // win Scissors
@@ -41,6 +42,36 @@ public class Day2 {
         else if (winLeft( y , o )) point = 6;              //win
         return point + pointForElecction( y );
     }
+
+    private  static  int strategic (char y){
+        int strategic = -1;
+        if ( y == 'Y') strategic = 0;
+        else if ( y == 'Z') strategic = 1;
+        return strategic;
+    }
+
+
+    private static int pointForStrategic( char e,char y ){
+        int strategic = strategic( y );
+        int point = 0;
+        if( strategic > 0){
+            
+        }else if (strategic == 0){
+            point = pointForElecction( e );
+        }else{
+
+        }
+        return point;
+    }
+    private static int pointsForBattleStrategic(char o, char y){
+        int strategic = strategic( y );
+        int point = 0;                                 // lost
+        if( strategic == 0) point = 3; //draw
+        else if (strategic > 0) point = 6;              //win
+        return point + pointForElecction( y );
+    }
+
+
     // Writtin
     private static BufferedReader br = null;
     private static String rd;
