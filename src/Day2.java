@@ -44,31 +44,39 @@ public class Day2 {
     }
 
     private  static  int strategic (char y){
-        int strategic = -1;
+        int strategic = -1; // X
         if ( y == 'Y') strategic = 0;
         else if ( y == 'Z') strategic = 1;
         return strategic;
+    }
+    /*
+Rock --> A, X(Lost) -1
+Paper --> B,Y(draw) 0
+Scissors --> C,Z (Win) 1
+ */
+    private static char selectHand(char e, int strategic){
+        if( strategic == 0 ) return e;
+        boolean isWin = strategic > 0;
+        char y = (isWin)?'B':'C'; // is Rock
+        if( isPaper( e )){
+            y = (isWin)?'C':'A';
+        } else if (isScissors(e)) {
+            y = (isWin)?'A':'B';
+        }
+        return y;
     }
 
 
     private static int pointForStrategic( char e,char y ){
         int strategic = strategic( y );
-        int point = 0;
-        if( strategic > 0){
-            
-        }else if (strategic == 0){
-            point = pointForElecction( e );
-        }else{
-
-        }
-        return point;
+        return pointForElecction( selectHand(e,strategic) );
     }
     private static int pointsForBattleStrategic(char o, char y){
         int strategic = strategic( y );
         int point = 0;                                 // lost
         if( strategic == 0) point = 3; //draw
         else if (strategic > 0) point = 6;              //win
-        return point + pointForElecction( y );
+        return point + pointForStrategic( o,y);
     }
 
 
@@ -109,9 +117,21 @@ public class Day2 {
             totalL += pointsForBattle(y,e);
             read();
         }
-        System.out.println(rd);
-        System.out.println(" totalR --> " + totalR);
-        System.out.println(" totalL --> " + totalL);
+        System.out.println(" You --> " + totalR);
+        System.out.println(" Oponent --> " + totalL);
+        //part 2
+        open();
+        int totalRS = 0;
+        int totalLS = 0;
+        while( rd != null){
+            e = rd.charAt( 0 );
+            y = rd.charAt( 2 );
+            totalRS += pointsForBattleStrategic(e,y);
+            totalLS += pointsForBattleStrategic(y,e);
+            read();
+        }
+        System.out.println(" You --> " + totalRS);
+        System.out.println(" Oponent --> " + totalLS);
 
 
     }
