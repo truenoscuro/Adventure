@@ -63,7 +63,8 @@ public class Day4 {
     }
 
     public static void main(String[] args) throws IOException {
-/*
+    /*
+    Example
         open(4);
         System.out.println(rd);
         System.out.println(isNumber(rd.charAt(2)));
@@ -76,7 +77,7 @@ public class Day4 {
                 isFullyContainElfFirst(ex1, ex2) + "\n" +
                 isFullyContainElfFirst(ex2, ex1) + "\n"
         );
- */
+    */
     // part 1
         open(4);
         int numFullyContain = 0;
@@ -95,13 +96,12 @@ public class Day4 {
         }
 
         System.out.println(" numFullyContain --> " + numFullyContain);
-
+        // Part 2;
         open(4);
         int sectionContain = 0;
         while( rd != null){
             elf1 = sectionElf(0);
             elf2 = sectionElf(searchComa() + 1 );
-
             if(     isSectionContainElfFirst( elf1 , elf2 ) ||
                     isSectionContainElfFirst( elf2 , elf1 ) ) {
                 sectionContain++;
