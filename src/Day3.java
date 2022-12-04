@@ -50,7 +50,6 @@ public class Day3 {
         char element;
         do{
             element = backpack[0].charAt( i++ );
-
         } while (   !(isElementBackpack( element,backpack[ 1 ] ) &&
                     isElementBackpack( element , backpack[ 2 ] ))
                 );
