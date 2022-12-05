@@ -64,6 +64,14 @@ public class Day5 {
         ArrayList newStack = stacks[ inst[2] - 1 ] ;
         for (int i = 0; i < total; i++) push( pop( oldStack ) , newStack ) ;
     }
+    private static void moveOrdened( int[] inst , ArrayList[] stacks ){
+        int total = inst[0] ;
+        ArrayList oldStack = stacks[ inst[1] - 1 ] ;
+        String ordened = "";
+        for (int i = 0; i < total; i++) ordened = pop( oldStack ) + ordened;
+        ArrayList newStack = stacks[ inst[2] - 1 ] ;
+        for (int i = 0 ; i < total ; i++) push( ordened.charAt(i) , newStack ) ;
+    }
 
     public static void main(String[] args) throws IOException {
         /*
@@ -80,7 +88,7 @@ public class Day5 {
         open(5);
         System.out.println(rd.charAt(1+4*8));
          */
-
+        // part 1
         ArrayList[] stacks = new ArrayList[9];
         for (int i = 0 ; i < 9 ; i++) stacks[i] = new ArrayList();
         initStacks(stacks);
@@ -90,9 +98,26 @@ public class Day5 {
             move( instruction() , stacks);
             read();
         }
+        System.out.print("part 1 --->  ");
         for ( ArrayList stack : stacks){
-            System.out.print(pop( stack ) );
+            System.out.print( pop( stack ) );
         }
+        System.out.println();
+        // part 2
+        ArrayList[] stacksOrdened = new ArrayList[9];
+        for (int i = 0 ; i < 9 ; i++) stacksOrdened[i] = new ArrayList();
+        initStacks(stacksOrdened);
+        read();
+        read();
+        while (rd != null){
+            moveOrdened( instruction() , stacksOrdened);
+            read();
+        }
+        System.out.print("part 2 ---> ");
+        for ( ArrayList stack : stacksOrdened){
+            System.out.print( pop( stack ) );
+        }
+
 
     }
 }
