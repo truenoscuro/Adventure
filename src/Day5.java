@@ -34,7 +34,35 @@ public class Day5 {
         return box;
     }
     private static void push ( char box , ArrayList stack){
-        stack.add( box );
+        stack.add( 0,box );
+    }
+    private static boolean isNum (char chr){
+        return !(chr < '0' || chr > '9');
+    }
+    private static int [] instruction(){
+        int [] inst = new int[3];
+        int indx = 0;
+        int leng = rd.length();
+        char chr;
+        String num ;
+        for (int i = 0; i < leng; i++){
+            chr = rd.charAt( i );
+            if( !isNum(chr) ) continue;
+            num = "";
+            while(  isNum( chr )){
+                num += chr;
+                if( ++i >= leng ) break;
+                chr = rd.charAt( i );
+            }
+            inst[indx++] = Integer.parseInt(  num );
+        }
+        return  inst;
+    }
+    private static void move( int[] inst , ArrayList[] stacks ){
+        int total = inst[0] ;
+        ArrayList oldStack = stacks[ inst[1] - 1 ] ;
+        ArrayList newStack = stacks[ inst[2] - 1 ] ;
+        for (int i = 0; i < total; i++) push( pop( oldStack ) , newStack ) ;
     }
 
     public static void main(String[] args) throws IOException {
@@ -56,14 +84,15 @@ public class Day5 {
         ArrayList[] stacks = new ArrayList[9];
         for (int i = 0 ; i < 9 ; i++) stacks[i] = new ArrayList();
         initStacks(stacks);
-        System.out.println(Arrays.toString(stacks));
-        System.out.println(rd);
         read();
-        System.out.println(rd);
         read();
-        System.out.println(rd);
-
-
+        while (rd != null){
+            move( instruction() , stacks);
+            read();
+        }
+        for ( ArrayList stack : stacks){
+            System.out.print(pop( stack ) );
+        }
 
     }
 }
