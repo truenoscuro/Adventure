@@ -40,11 +40,14 @@ public class Day6 {
         int leng = rd.length();
 
         String subString = "";
+        // canvia solv a part1 si vols la solucio de la part1  o part2 si vols la solucio
+        // de la part 2
         int part1 =  4;
         int part2 = 14;
+        int solv = part2;
         int num = part2 ;
-        for( int i = 0 ; i + part2 < leng ; i++){
-            subString = rd.substring( i , part2 + i );
+        for( int i = 0 ; i + solv < leng ; i++ ){
+            subString = rd.substring( i , solv + i );
             if( !haveRepeat( subString ) ) break;
             num++;
         }
