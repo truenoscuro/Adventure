@@ -51,6 +51,15 @@ public class Day6 {
             if( !haveRepeat( subString ) ) break;
             num++;
         }
+        // segona forma de solucionarlo
+        int i = 0;
+        do{
+            subString = rd.substring( i, solv + i);
+            i++;
+        }while(haveRepeat(subString));
+        //segona solucio
+        System.out.println("i ---> " +(i+solv-1) );
+        // primera solucio
         System.out.println("subString --> " +  subString);
         System.out.println("breakPoint --> " +  num);
 
