@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Day7 {
+public class Plantilla {
     private static BufferedReader br = null;
     private static String rd;
 
