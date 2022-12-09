@@ -1,17 +1,17 @@
 package Objects;
 
-public class Vector {
+public class Vec {
 
     private int x;
     private int y;
 
-    public Vector(int [] v){
+    public Vec(int [] v){
         this.x = v[0];
         this.y = v[0];
     }
 
-    public static Vector nw (int [] v){
-        return new Vector( v );
+    public static Vec nw (int [] v){
+        return new Vec( v );
     }
     public int [] getV() {
         return new int [] { x , y };
