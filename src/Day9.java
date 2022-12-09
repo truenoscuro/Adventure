@@ -2,8 +2,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class Plantilla {
+public class Day9 {
     private static BufferedReader br = null;
     private static String rd;
 
@@ -26,9 +27,17 @@ public class Plantilla {
     }
 
 
+    private static ArrayList<> visitets = new ArrayList<>();
 
+    private static  boolean isVisited( int [] point ){
+        for( Object v: visitets){
+            if(v[0] == point[0]);
 
+        }
+
+    }
     public static void main(String[] args) {
+
 
     }
 }
