@@ -62,6 +62,7 @@ public class Day9 {
         int [] v = dir.getV();
         return new int [] { H[0] + v[0] , H[1] + v[1] };
     }
+
     private static boolean isNum(char a){
         return '0' <= a && a <= '9';
     }
@@ -88,19 +89,27 @@ public class Day9 {
                 (T[0]-H[0])*(T[0]-H[0]) +( T[1]-H[1])*( T[1]-H[1])
         );
     }
+    private static Vec movePoint(Vec ant,Vec heat){
+        int [] v1 = ant.getV();
+        int [] v2 = heat.getV();
+        int d = dist( ant , heat );
+        int [] mv = { v1[0]+( v2[0] - v1[0] )/d, ( v1[1] + ( v2[1] - v1[1] )/d ) };
+        return Vec.nw(mv);
+
+    }
     private static void updateSnake( int[] Hnew ) throws CloneNotSupportedException {
         int leng = snake.size();
-        Vec snakeAnt = snake.get( 0 ).clone();
+        Vec heat = snake.get( 0 );
         snake.set( 0 , Vec.nw( Hnew ) ); // a 0 poses [1,0]
-        Vec aux;
         Vec tail;
-
         for( int i = 1 ; i < leng ; i++) {
             if ( dist( snake.get( i ), snake.get( i - 1 ) ) <= 1 ) break;
-            aux = snake.get( i ).clone();
-            snake.set( i, snakeAnt ); // a la posicio i li poses se post
-            snakeAnt = aux;
+            snake.set( i , movePoint( snake.get( i ) , heat ) ); // a la posicio i li poses se post
         }
+        for (Vec s :snake){
+            System.out.println(Arrays.toString(s.getV()));
+        }
+        System.out.println();
         tail = snake.get( snake.size() - 1 ).clone();
         if( !isVisited( tail.getV() ) ) visitets.add( tail );
     }
@@ -129,7 +138,22 @@ public class Day9 {
         for( Vec vec:visitets){
             System.out.println(Arrays.toString( vec.getV() ) );
         }
+
+    /*
+        int [] v1 ={0,0};
+        int [] v2 = {1,0};
+        int [] v3 = {1,1};
+        int x = v3[0]-v1[0];
+        int y = v3[1]-v1[1];
+        System.out.println("x "+ x +" , y "+ y );
+        int d = dist(v1,v3);
+        System.out.println(dist(v3,v1));
+        System.out.println("x "+ (v1[0]+x/d) +" , y "+ (v1[1] +y/d) );
+     */
     }
+
+
+
 
 
 }
