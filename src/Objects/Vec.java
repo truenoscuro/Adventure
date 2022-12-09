@@ -7,7 +7,7 @@ public class Vec {
 
     public Vec(int [] v){
         this.x = v[0];
-        this.y = v[0];
+        this.y = v[1];
     }
 
     public static Vec nw (int [] v){
@@ -16,4 +16,8 @@ public class Vec {
     public int [] getV() {
         return new int [] { x , y };
     }
+
+    public Vec clone() throws CloneNotSupportedException {
+        return new Vec(new int [] { x , y });
+    };
 }
