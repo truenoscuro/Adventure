@@ -40,8 +40,6 @@ public class Day9 {
         int [] init = {0,0};
         int leng = 10 ;
         for( int i = 0; i < leng ; i++ )  snake.add( new Vec( init ) );
-
-
     }
 
     private static  boolean isVisited( int [] point ) {
@@ -58,9 +56,11 @@ public class Day9 {
         dirs.put('U', Vec.nw( new int [] { -1 , 0 } ) );
     }
 
-    private static int [] sum( int [] H, Vec dir ){
+
+    private static Vec  sum( Vec Hvec, Vec dir ){
         int [] v = dir.getV();
-        return new int [] { H[0] + v[0] , H[1] + v[1] };
+        int [] H = Hvec.getV();
+        return  Vec.nw( new int [] {H[0] + v[0] , H[1] + v[1] });
     }
 
     private static boolean isNum(char a){
@@ -74,48 +74,58 @@ public class Day9 {
             num = a + num  ;
             a = rd.charAt( --i ) ;
         }
-
         return Integer.parseInt( num );
     }
-    private static int dist( int [] T, int [] H ){
-        return (int) Math.sqrt(
-                (T[0]-H[0])*(T[0]-H[0]) +( T[1]-H[1])*( T[1]-H[1])
-        );
-    }
-    private static int dist(  Vec Tvect ,Vec Hvect ){
-        int [] T = Tvect.getV();
-        int [] H = Hvect.getV();
-        return (int) Math.sqrt(
-                (T[0]-H[0])*(T[0]-H[0]) +( T[1]-H[1])*( T[1]-H[1])
-        );
-    }
-    private static Vec movePoint(Vec ant,Vec heat){
-        int [] v1 = ant.getV();
+
+
+
+
+
+
+    private static Vec mov( Vec heat , Vec act ){
         int [] v2 = heat.getV();
-        int d = dist( ant , heat );
-        int [] mv = { v1[0]+( v2[0] - v1[0] )/d, ( v1[1] + ( v2[1] - v1[1] )/d ) };
-        return Vec.nw(mv);
+        int [] v1 = act.getV();
+        int dx = v2[0]-v1[0];
+        int dy = v2[1]-v1[1];
+        int d = ( int ) Math.sqrt( Math.pow( dx ,2) + Math.pow( dy ,2));
+        int nx = dx/d;
+        if( nx == 0 && dx != 0){
+            if( dx > 0 ) nx = 1;
+            else nx = -1;
+        }
+        int ny = dy/d;
+        if( ny == 0 && dy != 0){
+            if( dy > 0 ) ny = 1;
+            else ny = -1;
+        }
+        int [] norm = { v1[0] + nx ,v1[1] + ny};
+        return Vec.nw(norm);
+    }
+
+
+    private static boolean isClausure( Vec heat , Vec act ){
+        int [] v1 = heat.getV();
+        int [] v2= act.getV();
+        int vX = Math.abs( v2[0] - v1[0] );
+        int vY = Math.abs( v2[1] - v1[1] );
+        return    vX <= 1 && vY <= 1;
 
     }
     private static void updateSnake( int[] Hnew ) throws CloneNotSupportedException {
         int leng = snake.size();
-        Vec heat = snake.get( 0 );
         snake.set( 0 , Vec.nw( Hnew ) ); // a 0 poses [1,0]
         Vec tail;
         for( int i = 1 ; i < leng ; i++) {
-            if ( dist( snake.get( i ), snake.get( i - 1 ) ) <= 1 ) break;
-            snake.set( i , movePoint( snake.get( i ) , heat ) ); // a la posicio i li poses se post
+            if ( isClausure( snake.get( i ) , snake.get( i - 1 ) )  ) break;
+            snake.set( i , mov(   snake.get( i - 1 ) , snake.get( i ) ) ); // a la posicio i li poses se post
         }
-        for (Vec s :snake){
-            System.out.println(Arrays.toString(s.getV()));
+        tail = snake.get( snake.size() - 1 );
+        if( !isVisited( tail.getV() ) ) {
+            visitets.add( tail );
         }
-        System.out.println();
-        tail = snake.get( snake.size() - 1 ).clone();
-        if( !isVisited( tail.getV() ) ) visitets.add( tail );
     }
-    public static void main(String[] args) throws CloneNotSupportedException {
-
-        open(true,9);
+    private static void problem1() throws CloneNotSupportedException {
+        open(false,9);
         // init dirs
         int numMov;
         Vec dir;
@@ -127,29 +137,22 @@ public class Day9 {
             dir = dirs.get( rd.charAt( 0 ) );
             numMov =  calcNum( );
             for ( int i = 0 ; i < numMov ; i++ ){
-                updateSnake( sum( snake.get( 0 ).getV() , dir ) );
+                updateSnake( sum( snake.get(0) , dir ).getV() );
+
             }
-
-
             read();
-
         }
+
         System.out.println("Total T visitets --> " + visitets.size());
-        for( Vec vec:visitets){
-            System.out.println(Arrays.toString( vec.getV() ) );
-        }
 
-    /*
-        int [] v1 ={0,0};
-        int [] v2 = {1,0};
-        int [] v3 = {1,1};
-        int x = v3[0]-v1[0];
-        int y = v3[1]-v1[1];
-        System.out.println("x "+ x +" , y "+ y );
-        int d = dist(v1,v3);
-        System.out.println(dist(v3,v1));
-        System.out.println("x "+ (v1[0]+x/d) +" , y "+ (v1[1] +y/d) );
-     */
+
+    }
+    public static void main(String[] args) throws CloneNotSupportedException {
+
+        problem1();
+
+
+
     }
 
 
