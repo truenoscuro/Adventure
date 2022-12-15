@@ -121,7 +121,7 @@ public class Day11 {
     static ArrayList<Integer> primers = new ArrayList<>();
     public static void main(String[] args) {
        //problem1();
-        double solv = 5.4832778815E10;
+        double solv = Integer.MAX_VALUE;
         int  solv2 = (int) solv;
         System.out.println(solv2);
 

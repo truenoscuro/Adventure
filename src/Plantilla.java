@@ -24,13 +24,28 @@ public class Plantilla {
             throw new RuntimeException(e);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private static void  problem1(){
 
     }
     private static void  problem2(){
 
     }
-
 
 
 
