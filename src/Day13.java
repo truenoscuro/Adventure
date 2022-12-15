@@ -93,25 +93,28 @@ public class Day13 {
 
     public static void main(String[] args) {
         problem1();
-
         /*
-        ArrayList<Signal> signals = new ArrayList<>();
-        rd = " [1,[2,[3,[4,[5,6,7]]]]],8,9]";
-
+        rd = "[1,[2,[3,[4,[5,6,7]]]],8,9]";
         Signal s1 = new Signal( rd , 0 );
         s1.add();
-        signals.add( s1 );
-        System.out.println(s1);
+
+
         rd = "[1,[2,[3,[4,[5,6,0]]]],8,9]";
         Signal s2 = new Signal(rd,0);
         s2.add();
-        System.out.println(s2);
-
-        signals.add( s2 );
-        s1.compare(s2);
+        ArrayList<Signal> signals = new ArrayList<>();
+        signals.add(s1); signals.add(s2);
 
 
-         */
+        signals.forEach(System.out::println);
+        System.out.println("-----------------------------");
+        signals.sort(Signal::compare);
+        signals.forEach(System.out::println);
+        //s1.compare(s2);
+*/
+
+
+
 
 
 
