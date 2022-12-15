@@ -61,7 +61,7 @@ public class Day15 {
     2 --> M1 - C == 0 -->  un unic cas que a1 = x2
     3 --> M1 - C > 0 --> Deim D = M1-C aleshores x1 pertany a [ a1 - D , D - a1]) (D-a1)-(a1-D) = (2*(M1-C)-2a1)
      [    ]   [    ]
-        [       ]
+        [       ] --> la idea es ordenar per la y1 [y1,y2]
      */
 
     public static void main(String[] args) {
