@@ -20,6 +20,7 @@ public class Vec {
     public Vec(int x, int y){
         this( new int[]{x,y} );
     }
+
     public Vec(int x, int y,char value){
         this(x,y);
         this.value = value;
