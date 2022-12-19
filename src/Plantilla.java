@@ -7,10 +7,10 @@ public class Plantilla {
     private static BufferedReader br = null;
     private static String rd;
 
-    private static void open( boolean isExample , int num )  {
+    private static void open( )  {
         String path = (isExample)? "examples":"utils";
         try {
-            br = new BufferedReader(new FileReader(path+"/day"+ num +".txt"));
+            br = new BufferedReader(new FileReader(path+"/day"+ numTxt +".txt"));
             read();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -48,8 +48,11 @@ public class Plantilla {
     }
 
 
-
+    static boolean isExample = true;
+    static int numTxt = 0;
     public static void main(String[] args) {
+
+
 
     }
 }
